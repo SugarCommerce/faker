@@ -1,0 +1,84 @@
+{
+    "name": "sugarcommerce/faker",
+    "description": "Fake data for seeding a WordPress shop while you build it: names, emails, prices in minor units, weighted statuses and believable dates, real ids from the site, and real demo media made in code -- a WAV, a PNG, a PDF, a ZIP -- the same bytes every run.",
+    "homepage": "https://github.com/SugarCommerce/faker",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "David Sherlock",
+            "homepage": "https://arraypress.com/"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "faker",
+        "fake-data",
+        "seeding",
+        "development",
+        "demo"
+    ],
+    "require": {
+        "php": ">=8.3",
+        "sugarcommerce/pdf": "dev-main",
+        "sugarcommerce/storage": "dev-main"
+    },
+    "require-dev": {
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpunit/phpunit": "^12.0",
+        "squizlabs/php_codesniffer": "^3.13.5",
+        "wp-coding-standards/wpcs": "^3.4"
+    },
+    "suggest": {
+        "ext-gd": "Draws the PNG artwork Media makes."
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../pdf",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../storage",
+            "options": {
+                "symlink": false
+            }
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SugarCommerce\\Faker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SugarCommerce\\Faker\\Tests\\": "tests/"
+        },
+        "exclude-from-classmap": [
+            "/tests/bootstrap.php"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "phpunit",
+        "lint": "phpcs",
+        "format": "phpcbf --standard=phpcs-format.xml.dist",
+        "format:check": "phpcs --standard=phpcs-format.xml.dist"
+    },
+    "support": {
+        "issues": "https://github.com/SugarCommerce/faker/issues",
+        "source": "https://github.com/SugarCommerce/faker"
+    }
+}
