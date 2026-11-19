@@ -42,6 +42,20 @@
         },
         {
             "type": "path",
+            "url": "../money",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../qr",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
             "url": "../storage",
             "options": {
                 "symlink": false

@@ -91,16 +91,16 @@ final class MediaTest extends TestCase {
 	public function test_a_licence_says_something_else(): void {
 		$media = new Media();
 
-		$this->assertStringContainsString( 'Credit the artist', $media->for( 'Licence.pdf' ) );
-		$this->assertStringNotContainsString( 'Credit the artist', $media->for( 'Guide.pdf' ) );
+		$this->assertStringContainsString( 'Credit the artist', self::page( $media->for( 'Licence.pdf' ) ) );
+		$this->assertStringNotContainsString( 'Credit the artist', self::page( $media->for( 'Guide.pdf' ) ) );
 	}
 
 	public function test_a_pdf_can_say_anything(): void {
 		$pdf = ( new Media() )->pdf( 'Terms', array( 'First paragraph.', 'Second paragraph.' ) );
 
 		$this->assertStringContainsString( '/Title (Terms)', $pdf );
-		$this->assertStringContainsString( 'First paragraph.', $pdf );
-		$this->assertStringContainsString( 'Second paragraph.', $pdf );
+		$this->assertStringContainsString( 'First paragraph.', self::page( $pdf ) );
+		$this->assertStringContainsString( 'Second paragraph.', self::page( $pdf ) );
 	}
 
 	/* ─── PNG ───────────────────────────────────────────────────────── */
@@ -215,7 +215,7 @@ final class MediaTest extends TestCase {
 
 		$this->assertSame( "Acme\nnotes.txt\n", $media->for( 'notes.txt' ) );
 		$this->assertStringContainsString( '/Creator (Acme seed)', $media->for( 'Guide.pdf' ) );
-		$this->assertStringContainsString( 'Acme demo', $media->for( 'Guide.pdf' ) );
+		$this->assertStringContainsString( 'Acme demo', self::page( $media->for( 'Guide.pdf' ) ) );
 		$this->assertSame( "Acme\nKit.zip\n", self::unzip( $media->for( 'Kit.zip' ) )['Kit/README.txt']['data'] );
 	}
 
@@ -275,6 +275,25 @@ final class MediaTest extends TestCase {
 		$value = unpack( $format, $bytes, $offset );
 
 		return is_array( $value ) && is_int( $value[1] ?? null ) ? $value[1] : -1;
+	}
+
+	/**
+	 * A PDF's content streams, inflated: sugarcommerce/pdf deflates them.
+	 *
+	 * @param string $pdf The document.
+	 *
+	 * @return string
+	 */
+	private static function page( string $pdf ): string {
+		preg_match_all( '/<<\/Length (\d+) \/Filter \/FlateDecode>>\nstream\n/', $pdf, $streams, PREG_OFFSET_CAPTURE | PREG_SET_ORDER );
+
+		$text = '';
+
+		foreach ( $streams as $stream ) {
+			$text .= (string) gzuncompress( substr( $pdf, $stream[0][1] + strlen( $stream[0][0] ), (int) $stream[1][0] ) );
+		}
+
+		return $text;
 	}
 
 	/**
