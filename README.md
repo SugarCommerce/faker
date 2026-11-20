@@ -119,18 +119,17 @@ true )`, `Media::png( 'Cover', 300 )`, `$media->pdf( $title, $paragraphs )`,
 PDFs are written by sugarcommerce/pdf and ZIPs by sugarcommerce/storage's
 `ZipStream`.
 
-## Moving from arraypress/wp-faker
+## Security
 
-| Was | Now |
-|---|---|
-| `arraypress/wp-faker` | `sugarcommerce/faker` |
-| `ArrayPress\Faker\Fake` | `SugarCommerce\Faker\Fake` -- every method unchanged |
-| `ArrayPress\Faker\Data` | `SugarCommerce\Faker\Data` -- every list unchanged |
-
-New: `Fake::seed()`, and `Media` -- the retired `sugarcommerce/dev-tools`
-package's `DemoMedia`, on the WordPress family's PDF and ZIP writers. Its
-`docblocks` and `smoke` commands check a codebase rather than make data, and
-are not here.
+* Media writes no file and fetches nothing: it hands back bytes, and where
+  they go is up to you
+* A ZIP named like a path (`../`, `/`, backslashes) still unpacks inside a
+  folder of its own
+* A bracket in a PDF's title or text is escaped, so a name cannot add an
+  entry of its own to the document
+* Registers no hooks, admin actions or commands; the site lookups only read
+* The seeded generator is Mersenne Twister: never use it for a token, a
+  password or anything else that must not be guessed
 
 ## Requirements
 
