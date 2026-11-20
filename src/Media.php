@@ -12,9 +12,9 @@ declare( strict_types=1 );
 
 namespace SugarCommerce\Faker;
 
-use SugarCommerce\Pdf\Color;
 use SugarCommerce\Pdf\Document;
-use SugarCommerce\Pdf\Font;
+use SugarCommerce\Pdf\Models\Color;
+use SugarCommerce\Pdf\Models\Font;
 use SugarCommerce\Storage\Files\ZipStream;
 
 /**
