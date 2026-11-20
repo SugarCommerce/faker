@@ -393,7 +393,7 @@ class Fake {
 	 *
 	 * @return mixed Random element, or null if there is nothing to pick from.
 	 */
-	public static function random_element( array $items ) {
+	public static function random_element( array $items ): mixed {
 		if ( [] === $items ) {
 			return null;
 		}
@@ -412,7 +412,7 @@ class Fake {
 	 *
 	 * @return mixed Random weighted element.
 	 */
-	public static function weighted( array $weighted ) {
+	public static function weighted( array $weighted ): mixed {
 		$positive = array_filter( $weighted, static fn( $weight ): bool => is_numeric( $weight ) && $weight > 0 );
 
 		if ( [] === $positive ) {

@@ -51,7 +51,7 @@ final class Media {
 	 *
 	 * @since 1.0.0
 	 */
-	public const MADE = 1_767_225_600; // 2026-01-01 00:00:00 UTC.
+	public const int MADE = 1_767_225_600; // 2026-01-01 00:00:00 UTC.
 
 	/**
 	 * Samples per second. Half CD rate: every browser plays it, and three
@@ -59,7 +59,7 @@ final class Media {
 	 *
 	 * @since 1.0.0
 	 */
-	public const RATE = 22_050;
+	public const int RATE = 22_050;
 
 	/**
 	 * Fixed for the life of the object, so one instance always makes the

@@ -22,7 +22,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const FIRST_NAMES = [
+	public const array FIRST_NAMES = [
 		'James',
 		'John',
 		'Robert',
@@ -130,7 +130,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const LAST_NAMES = [
+	public const array LAST_NAMES = [
 		'Smith',
 		'Johnson',
 		'Williams',
@@ -226,7 +226,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const COMPANY_TEMPLATES = [
+	public const array COMPANY_TEMPLATES = [
 		'%s Industries',
 		'%s Corp',
 		'%s Solutions',
@@ -254,7 +254,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const EMAIL_DOMAINS = [
+	public const array EMAIL_DOMAINS = [
 		'example.com',
 		'company.com',
 		'business.net',
@@ -277,7 +277,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const COUNTRY_CODES = [
+	public const array COUNTRY_CODES = [
 		'us',
 		'gb',
 		'ca',
@@ -335,7 +335,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const WORDS = [
+	public const array WORDS = [
 		'the',
 		'be',
 		'to',
@@ -448,7 +448,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const SKU_PREFIXES = [
+	public const array SKU_PREFIXES = [
 		'PRD',
 		'SKU',
 		'ITM',
@@ -466,7 +466,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const PRODUCT_ADJECTIVES = [
+	public const array PRODUCT_ADJECTIVES = [
 		'Premium',
 		'Professional',
 		'Essential',
@@ -494,7 +494,7 @@ class Data {
 	 *
 	 * @var string[]
 	 */
-	public const PRODUCT_NOUNS = [
+	public const array PRODUCT_NOUNS = [
 		'Widget',
 		'Toolkit',
 		'Suite',
