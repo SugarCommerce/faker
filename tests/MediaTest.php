@@ -197,6 +197,52 @@ final class MediaTest extends TestCase {
 		}
 	}
 
+	/* ─── Names from outside ────────────────────────────────────────── */
+
+	/**
+	 * A name is a title, never a path: a ZIP called `../../etc/x.zip` or
+	 * `/tmp/x.zip` still unpacks into a folder of its own, and nothing in
+	 * it lands outside wherever it is opened.
+	 *
+	 * @param string $name The archive's name.
+	 */
+	#[DataProvider( 'paths' )]
+	public function test_a_zip_named_like_a_path_unpacks_inside_its_folder( string $name ): void {
+		$members = array_keys( self::unzip( ( new Media() )->for( $name ) ) );
+
+		$this->assertCount( 4, $members );
+
+		foreach ( $members as $member ) {
+			$this->assertStringStartsNotWith( '/', $member );
+			$this->assertNotContains( '..', explode( '/', $member ), $member );
+			$this->assertStringNotContainsString( '\\', $member );
+		}
+	}
+
+	/**
+	 * Archive names that read as paths.
+	 *
+	 * @return array<string, array{0: string}>
+	 */
+	public static function paths(): array {
+		return array(
+			'parent folders' => array( '../../../etc/evil.zip' ),
+			'absolute'       => array( '/tmp/evil.zip' ),
+			'backslashes'    => array( '..\\..\\evil.zip' ),
+		);
+	}
+
+	/**
+	 * A title closes no PDF string early: a bracket in the name is
+	 * escaped, so it cannot add an entry of its own to the document.
+	 */
+	public function test_a_pdf_title_cannot_close_its_string(): void {
+		$pdf = ( new Media() )->for( 'a) /OpenAction (x.pdf' );
+
+		$this->assertStringContainsString( '/Title (a\) /OpenAction \(x)', $pdf );
+		$this->assertStringNotContainsString( 'a) /OpenAction', $pdf );
+	}
+
 	/* ─── Text and settings ─────────────────────────────────────────── */
 
 	public function test_anything_else_is_the_placeholder_with_its_name_in(): void {
